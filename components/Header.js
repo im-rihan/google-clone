@@ -1,13 +1,14 @@
 import { MicrophoneIcon, SearchIcon, XIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Avatar } from "./Avatar";
 import HeaderOptions from "./HeaderOptions";
 
 function Header() {
   const router = useRouter();
-  const searchInputRef = useRef(null);
+  const searchInputRef = useRef();
+  const [inputValue, setInputValue] = useState(router.query.term);
 
   const search = (e) => {
     e.preventDefault();
@@ -36,8 +37,8 @@ function Header() {
             ref={searchInputRef}
             type="text"
             className="flex-grow focus:outline-none w-full"
-            onChange={(e) => e.preventDefault()}
-            value={router.query.term}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
           />
           <XIcon
             className="h-7 text-gray-500 sm:mr-3 cursor-pointer
