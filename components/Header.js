@@ -7,7 +7,7 @@ import HeaderOptions from "./HeaderOptions";
 
 function Header() {
   const router = useRouter();
-  const searchInputRef = useRef();
+  const searchInputRef = useRef(null);
 
   const search = (e) => {
     e.preventDefault();
@@ -36,6 +36,7 @@ function Header() {
             ref={searchInputRef}
             type="text"
             className="flex-grow focus:outline-none w-full"
+            onChange={(e) => e.preventDefault()}
             value={router.query.term}
           />
           <XIcon
